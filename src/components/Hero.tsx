@@ -1,86 +1,110 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
-import GradientWaves from "./ui/GradientWaves";
-import { Link } from "react-router-dom";
+import LazyHyperspeed from "./ui/Lazyhyperspeed";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, delay, ease: "easeOut" },
+  }),
+};
+
+const hyperspeedColors = {
+  roadColor: 0x05050f,
+  islandColor: 0x0a0a1a,
+  background: 0x000000,
+  shoulderLines: 0x2c3e8c,
+  brokenLines: 0x2c3e8c,
+  leftCars: [0x3b5bdb, 0x4c6ef5, 0x5c7cfa],
+  rightCars: [0x1864ab, 0x1971c2, 0x228be6],
+  sticks: 0x4c6ef5,
+};
 
 export const Hero = () => {
+  // memoizado fora do componente já bastaria, mas manter aqui deixa explícito
+  // que o objeto não pode ser recriado a cada render (o Hyperspeed recriaria a cena WebGL inteira)
+  const hyperspeedOptions = useMemo(() => ({ colors: hyperspeedColors }), []);
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-visible mt- "
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-24 pb-10 md:pt-28 md:pb-0 bg-[#05050f]"
     >
-      {/* Novo background animado (React Bits) */}
-      <div className="absolute inset-0 z-10 overflow-hidden ">
-        <GradientWaves
-          horizonColor="#5227FF"
-          waveColor="#FF9FFC"
-          crestColor="#FFFFFF"
-          speed={1}
-          amplitude={2.5}
-          waveScale={0.6}
-          waveRatio={0.9}
-          swell={35}
-          turbulence={20}
-          tilt={1.11}
-          zoom={0.75}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+        }}
+      >
+        <LazyHyperspeed
+          className="w-full h-full"
+          rootMargin="0px"
+          effectOptions={hyperspeedOptions}
         />
       </div>
 
-      {/* Resto do conteúdo continua igual, só ajustei z-index pra ficar por cima */}
       <div className="container mx-auto px-6 relative z-10 pointer-events-none">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mt-14 mb-8"
+            initial="hidden"
+            animate="visible"
+            custom={0.2}
+            variants={fadeUp}
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 md:mb-8"
           >
-            A Internet é o Seu{" "}
-            <span className="text-gradient">Palco.</span>
-            <br />
-            Que Tipo de Espetáculo{" "}
-            <span className="relative">
-              <span className="text-gradient">Você Quer Dar?</span>
-              <motion.span
-                className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              />
+            A Internet é seu Palco.{" "}
+            <span className="block sm:inline">
+              Que espetáculo sua marca está entregando?
             </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12"
+            initial="hidden"
+            animate="visible"
+            custom={0.4}
+            variants={fadeUp}
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-12"
           >
-            Todo grande show exige uma produção impecável. Somos o{" "}
-            <span className="text-foreground font-medium italic">time</span> que cuida
-            dos bastidores digitais para que o seu negócio tenha uma presença profissional, marcante e sem falhas a cada clique.
+            Por trás de toda grande apresentação existe uma produção impecável.
+            A Lunding cria experiências digitais que unem design, estratégia e
+            tecnologia para transformar a presença da sua marca em
+            oportunidades.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto"
+            initial="hidden"
+            animate="visible"
+            custom={0.6}
+            variants={fadeUp}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pointer-events-auto"
           >
-            <Button variant="hero" size="xl" className="group" asChild>
-              <Link to="/sobre-nos">
+            <Button
+              variant="hero"
+              size="xl"
+              className="group w-full sm:w-auto"
+              asChild
+            >
+              <a href="https://wa.link/ve0vb2" target="_blank" rel="noopener noreferrer">
                 Criar meu site
                 <ArrowRight className="transition-transform group-hover:translate-x-1" />
-              </Link>
+              </a>
             </Button>
-            <Button variant="glass" size="xl" asChild>
-              <a href="#servicos">Saiba Mais</a>
+            <Button
+              variant="glass"
+              size="xl"
+              className="w-full sm:w-auto"
+              asChild
+            >
+              <a href="#quem-somos">Conhecer a Lunding</a>
             </Button>
           </motion.div>
         </div>
       </div>
-
     </section>
   );
 };

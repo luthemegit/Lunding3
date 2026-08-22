@@ -1,62 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
     /* Deep midnight blue palette */
-    --background: 222 47% 6%;
+    --background: 224 60% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 10%;
+    --card: 224 55% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 8%;
+    --popover: 224 55% 7%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 221 83% 48%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 222 47% 15%;
+    --secondary: 224 45% 13%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 222 30% 18%;
+    --muted: 224 35% 16%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 280 85% 65%;
-    --accent-foreground: 210 40% 98%;
+    /* Antes era roxo (280 85% 65%) — agora azul, mesma família do primary */
+    --accent: 199 89% 52%;
+    --accent-foreground: 224 60% 4%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 222 30% 20%;
-    --input: 222 30% 20%;
-    --ring: 217 91% 60%;
+    --border: 224 35% 18%;
+    --input: 224 35% 18%;
+    --ring: 221 83% 48%;
 
     --radius: 0.75rem;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(280 85% 65%) 100%);
-    --gradient-hero: radial-gradient(ellipse at center top, hsl(217 91% 60% / 0.15) 0%, transparent 60%);
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 12%) 0%, hsl(222 47% 8%) 100%);
-    --gradient-glow: radial-gradient(circle, hsl(217 91% 60% / 0.4) 0%, transparent 70%);
+    /* Custom gradients — degradê monocromático azul escuro → ciano */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 48%) 0%, hsl(199 89% 52%) 100%);
+    --gradient-hero: radial-gradient(ellipse at center top, hsl(221 83% 48% / 0.18) 0%, transparent 60%);
+    --gradient-card: linear-gradient(180deg, hsl(224 55% 10%) 0%, hsl(224 55% 6%) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(221 83% 48% / 0.4) 0%, transparent 70%);
     
     /* Shadows */
-    --shadow-glow: 0 0 60px hsl(217 91% 60% / 0.3);
-    --shadow-card: 0 25px 50px -12px hsl(222 47% 4% / 0.5);
-    --shadow-button: 0 10px 30px -5px hsl(217 91% 60% / 0.4);
+    --shadow-glow: 0 0 60px hsl(221 83% 48% / 0.3);
+    --shadow-card: 0 25px 50px -12px hsl(224 60% 2% / 0.5);
+    --shadow-button: 0 10px 30px -5px hsl(221 83% 48% / 0.4);
 
     /* Sidebar */
-    --sidebar-background: 222 47% 8%;
+    --sidebar-background: 224 55% 6%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 30% 18%;
+    --sidebar-primary: 221 83% 48%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 224 35% 16%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 20%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-border: 224 35% 18%;
+    --sidebar-ring: 221 83% 48%;
   }
 }
 
@@ -67,11 +68,13 @@
 
   html {
     scroll-behavior: smooth;
+    overscroll-behavior-x: none;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
+    overscroll-behavior-x: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -127,6 +130,7 @@
     position: absolute;
     width: 400px;
     height: 400px;
+    max-width: 100%;
     border-radius: 50%;
     background: var(--gradient-glow);
     filter: blur(80px);
@@ -149,6 +153,9 @@
   }
   .animate-delay-500 {
     animation-delay: 500ms;
+  }
+.section-espaco {
+    @apply py-24 md:py-28;
   }
 }
 

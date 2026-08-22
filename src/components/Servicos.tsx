@@ -8,6 +8,7 @@ import {
   Palette,
   ChevronRight 
 } from "lucide-react";
+import RotatingText from "@/components/ui/RotatingText";
 
 const servicos = [
   {
@@ -43,8 +44,6 @@ export const Servicos = () => {
 
   return (
     <section id="servicos" className="py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
       
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -54,14 +53,47 @@ export const Servicos = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-            Meus{" "}
-            <span className="text-gradient">Serviços</span>
+          
+          <h2
+            className="
+              text-3xl
+              md:text-5xl
+              font-display
+              font-bold
+              mb-6
+            "
+          >
+            O que{" "}
+            <span className="text-gradient">
+              Fazemos?
+            </span>
           </h2>
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Soluções completas para transformar sua presença digital
-            e alcançar seus objetivos de negócio.
+            Do visual à experiência, construímos a presença digital que faz sua marca ser percebida, lembrada e escolhida.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6 mt-10">
+            <h4 className="text-2xl md:text-2xl font-display font-bold">
+              Criamos
+            </h4>
+            <RotatingText
+              texts={['Web Design', 'UX/UI Design', 'Sites Otimizados', 'Identidade Digital']}
+              mainClassName="inline-flex w-fit px-3 sm:px-4 md:px-5 bg-gradient-to-r from-primary to-accent text-white font-display font-bold text-3xl md:text-2xl overflow-hidden py-1 sm:py-1.5 md:py-2 justify-center rounded-lg"
+              staggerFrom="last"
+              initial={{ y: "60%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "-60%", opacity: 0 }}
+              staggerDuration={0.02}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 22, stiffness: 170, mass: 0.6 }}
+              rotationInterval={2400}
+              splitBy="characters"
+              auto
+              loop
+            />
+          </div>
+
         </motion.div>
 
         <div ref={ref} className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
